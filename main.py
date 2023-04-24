@@ -4,10 +4,9 @@
 
 # In[60]:
 
-
+import numpy as np
 import pandas as pd
-url='https://raw.githubusercontent.com/jane-hernandez/earthquake_dataviz/main/earthquakeAPI_data.csv?token=GHSAT0AAAAAACBOABKJDJ4PZUO7YNTW2J2MZB7TYOQ'
-df= pd.read_csv(url)
+df= pd.read_csv("earthquakeAPI_data.csv")
 
 
 # In[61]:
@@ -24,12 +23,48 @@ print(df.isnull().sum())
 
 # In[65]:
 
+from geopy.geocoders import Nominatim
+from geopy.extra.rate_limiter import RateLimiter
+import pycountry_convert as pc
+ 
+def get_continent_name(continent_code):
+    continent_code_dict = {
+        "AF": "Africa",
+        "AS": "Asia",
+        "AQ": "Antarctica",
+        "EU": "Europe",
+        "NA": "North America",
+        "OC": "Oceania",
+        "SA": "South America"}
+    return continent_code_dict[continent_code]
 
-#dataframe dropping Column null values because couldn't find a way to create a column continent from 'place' or 'location'
-dfresult = df.dropna(subset=['continent'])
-print(dfresult.isnull().sum())
+def get_continent(lat,long):
+    
+    locator = Nominatim(user_agent="gklvsd@gmail.com", timeout=10)
+    geocode = RateLimiter(locator.reverse, min_delay_seconds=1)
 
+    loc = geocode(f"{lat}, {long}", language="en")
+    
+    if loc is None:
+        return "Ocean/Unknown"
 
+    address = loc.raw["address"]
+    country_code = address["country_code"].upper()
+
+    continent_code = pc.country_alpha2_to_continent_code(country_code)
+    continent_name = get_continent_name(continent_code)
+
+    return continent_name
+
+subset_df = df[df["continent"].isna()]
+subset_df['continent'] = subset_df.apply(lambda row: get_continent(row['latitude'], row['longitude']), axis=1)
+id_continent_dict = dict(zip(subset_df['id'], subset_df['continent']))
+
+for index, row in df.iterrows():
+    if row['id'] in id_continent_dict:
+        df.at[index, 'continent'] = id_continent_dict[row['id']]
+
+del subset_df, id_continent_dict, index,row 
 # In[86]:
 
 
@@ -37,7 +72,7 @@ print(dfresult.isnull().sum())
 import seaborn as sns
 sns.relplot(
     data=df,
-    x="depth", y="nst",size="magnitude", sizes=(20, 200), hue='continent'
+    x="depth", y="nst", hue='continent', palette = "bright"
 )
 
 
@@ -45,7 +80,7 @@ sns.relplot(
 
 
 import plotly.express as px
-fig = px.scatter(dfresult, x="depth", y="nst", color='continent', size= 'magnitude')
+fig = px.scatter(df, x="depth", y="nst", color='continent', size= 'magnitude')
 fig.show()
 
 
