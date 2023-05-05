@@ -48,6 +48,7 @@ def map_events (continent):
     fig = px.scatter_mapbox(temp, lat="latitude", lon="longitude", color="magnitude", size ="magnitude",
                       color_continuous_scale=px.colors.sequential.Redor, size_max = 5,zoom=2,hover_name="title",hover_data=['date'])
     fig.update_traces(hovertemplate = "<b>%{hovertext}</b><br><br>Date: %{customdata[0]}<extra></extra>")
+    fig.update_layout(height=650,)
     return fig
 
 @app_map.callback(Output("scatter_graph","figure"),Input("select_continent","value"))
