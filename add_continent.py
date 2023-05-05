@@ -1,32 +1,15 @@
-
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[60]:
-
 import numpy as np
 import pandas as pd
 df= pd.read_csv("earthquakeAPI_data.csv")
 
-
-# In[61]:
-
-
-df
-
-
-# In[64]:
-
-
 print(df.isnull().sum())
 
-
-# In[65]:
-
+# Assign a continent label to rows that have missing values for that column.
 from geopy.geocoders import Nominatim
 from geopy.extra.rate_limiter import RateLimiter
 import pycountry_convert as pc
- 
+
+# Define a list of continent names to convert the continent code to a significant name.
 def get_continent_name(continent_code):
     continent_code_dict = {
         "AF": "Africa",
@@ -38,6 +21,7 @@ def get_continent_name(continent_code):
         "SA": "South America"}
     return continent_code_dict[continent_code]
 
+# Use the longitude and latitude to assign a continent value. Ocean/Unknown is assigned when there isn't one assigned from the library.
 def get_continent(lat,long):
     
     locator = Nominatim(user_agent="gklvsd@gmail.com", timeout=10)
@@ -56,84 +40,14 @@ def get_continent(lat,long):
 
     return continent_name
 
+# Apply the defined functions to a subset of the dataset that has missing values for the continent column.
 subset_df = df[df["continent"].isna()]
 subset_df['continent'] = subset_df.apply(lambda row: get_continent(row['latitude'], row['longitude']), axis=1)
 id_continent_dict = dict(zip(subset_df['id'], subset_df['continent']))
 
+# Replace the missing values for the column continent with the newfound values.
 for index, row in df.iterrows():
     if row['id'] in id_continent_dict:
         df.at[index, 'continent'] = id_continent_dict[row['id']]
 
 del subset_df, id_continent_dict, index,row 
-# In[86]:
-
-
-
-import seaborn as sns
-sns.relplot(
-    data=df,
-    x="depth", y="nst", hue='continent', palette = "bright"
-)
-
-
-# In[87]:
-
-
-import plotly.express as px
-fig = px.scatter(df, x="depth", y="nst", color='continent', size= 'magnitude')
-fig.show()
-
-
-# In[ ]:
-
-
-#df.drop('alert', axis=1, inplace=True)
-#df.drop('subnational', axis=1, inplace=True)
-#df.drop('city', axis=1, inplace=True)
-#df.drop('postcode', axis=1, inplace=True)
-#df.drop('what3words', axis=1, inplace=True);
-#df.drop('country', axis=1, inplace=True);
-
-#print(df.isnull().sum())
-
-
-# In[ ]:
-
-
-import seaborn as sns
-import numpy as np
-import matplotlib.pyplot as plt
-
-
-# In[69]:
-
-
-# plotting scatterplot with histograms for features total bill and tip.
-
-sns.jointplot(data=df, x= 'magnitude', y='mmi',hue='tsunami',sizes='felt' )
-
-
-# In[84]:
-
-
-#add column month
-df['month'] = df['date'].dt.month
-df.head()
-
-
-# In[90]:
-
-
-import plotly.express as px
-
-fig = px.histogram(df, y="type", animation_frame="month",
-            range_x=[0,200], color='type')
-
-fig.show()
-
-
-# In[ ]:
-
-
-
-
