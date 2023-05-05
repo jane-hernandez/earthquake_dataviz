@@ -45,7 +45,7 @@ subset_df = df[df["continent"].isna()]
 subset_df['continent'] = subset_df.apply(lambda row: get_continent(row['latitude'], row['longitude']), axis=1)
 id_continent_dict = dict(zip(subset_df['id'], subset_df['continent']))
 
-# Replace the missing values for the column continent with the newfound values.
+# Replace the missing values for the column continent with the newfound values continents.
 for index, row in df.iterrows():
     if row['id'] in id_continent_dict:
         df.at[index, 'continent'] = id_continent_dict[row['id']]
