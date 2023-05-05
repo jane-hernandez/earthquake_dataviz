@@ -51,3 +51,5 @@ for index, row in df.iterrows():
         df.at[index, 'continent'] = id_continent_dict[row['id']]
 
 del subset_df, id_continent_dict, index,row 
+
+df.to_csv("Earthquake_with_continents.csv")
