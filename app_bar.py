@@ -14,6 +14,7 @@ df = df[["magnitude","title","date","mmi","tsunami","sig","type","nst","rms","de
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app_bar = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+server = app_bar.server
 colorscale = {'earthquake': '#FF595E','explosion':'#FFCA3A','quarry blast':'#8AC926','ice quake':'#1982C4'}
 
 app_bar.layout = html.Div([
