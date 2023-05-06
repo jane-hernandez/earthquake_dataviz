@@ -1,0 +1,17 @@
+Welcome to the README page that describes the code and datasets used in this project.
+
+Please not that this page is not a comment on how the code works, but rather a step by step guid one which code to run and what repositories are necessary to run out code. 
+
+In order to run the code in this repository, please ensire your editor contains the following repositories;
+
+numpy, matplotlib, seaborn, pandas, json, plotly, dash, jupyter_dash.
+
+The first part of this project comprised of collecting the earthquake data. This was done using an api through a free api website. The code used to collect this information and store it in the dataset called "earthquakeAPI_data.csv" can be found in the "data_scraping.py" python file. This might take some time as the request rate is limited. If you don not want to run this file, all of the necessary data is already stored in the file "earthquakeAPI_data.csv"
+
+After collecting the dataset, some exploratory data analysis was applied raphing.ipbnto the data, which included looking for nans, duplicated columns and adding some useful columns to the data. This process is done in the python script entitled "add_continent.py". The processed data can thereafter be found in the "Earthquake_with_continents.csv" file. This is the file that contains all of the necessary data for the graphics that we generated. 
+
+"Graphing.ipbn" contains all of the code that we used to generate the graphs of the project and can be run if the file "Earthquake_with_continents.csv" is found in the same repository. "app_bar.py" and "app_map.py" contain the code necessary to generate the interactive maps, this code is encompassed in the "Graphing.ipbn", but we needed a .py function in order to host the apps online in order to create an iframe to show our apps on our final webpage. 
+
+index.html contains the html and css code we used to host our webpage on github pages. In order to see the webpage for this report please wither scroll down on the github page and click the "github-pages" button, following this on the page you are taken to click on the "View deployment" button. This will take you to our webpage containing all of our static and interactive graphs for the project. Or simply following the link: https://jane-hernandez.github.io/earthquake_dataviz/
+
+Please note that due to the size of the data and the face that we used a free hosting service for our apps, there may be some delay in some of the interactivity of the data.
