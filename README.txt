@@ -17,3 +17,5 @@ We used the platform Render to host our Dash apps. The first Dash app (https://e
 index.html contains the html and css code we used to host our webpage on github pages. In order to see the webpage for this report please wither scroll down on the github page and click the "github-pages" button, following this on the page you are taken to click on the "View deployment" button. This will take you to our webpage containing all of our static and interactive graphs for the project. Or simply following the link: https://jane-hernandez.github.io/earthquake_dataviz/
 
 Please note that due to the size of the data and the fact that we used a free hosting service for our Dash apps, there may be some delay in some of the interactivity of the data.
+
+Group members: Giacomo Collesei, Angela Jane Salazar Hernandez, Spencer Patrick Gengis Marcinko
