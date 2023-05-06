@@ -27,15 +27,63 @@
             data about how often, or devistating these events can be? If not, we hope that you will find our project interesting.
           </p>
         </div>
-        <h2>Task analysis</h2>
+        <h2>Dataset</h2>
         <div style="text-align: center;">
           <p style="color: black;">
-            The data set that we have analyses for this tast comes from rapid API, which is a free online API sharing site with a plethora of 
-            API's to choose from for projects just linke these. The data set contains:
+            We decided to obtain our data from EveryEarthquake API (https://rapidapi.com/dbarkman/api/everyearthquake). Our
+            initial data scraping provided 1,000 observations of earthquake type events but we will pull more data of the other types
+            of seismic events for a more comprehensive analysis. The dataset obtained contains the following columns:
           </p>
+          <ul>
+            <li>Index: An index assigned to each observation in the dataset.</li>
+            <li>Id: A combination of a 2-letter Seismic Network Code and a number assigned by the contributing seismic network.</li>
+            <li>Magnitude: The magnitude of the vibrations based on the Richter scale.</li>
+            <li>Type: The classification of the event based on its intensity. In our case, we only took earthquake-type rows.</li>
+            <li>Title: It indicates the event's name based on the origin's magnitude and location.</li>
+            <li>Date: It reports the date and time of the event. The timezone of reference for the time is not indicated.</li>
+            <li>Time: Time of origin of the earthquake using an UTC to avoid confusion caused by local time zones.</li>
+            <li>Updated: Time when the event was most recently updated.</li>
+            <li>Url: Link to USGS Event Page for event.</li>
+            <li>detailUrl: Link to the webpage with the details about the event.</li>
+            <li>Felt: This indicates the number of people who reported feeling the earthquake. This information may be absent from many rows because it is website-source specific.</li>
+            <li>Cdi: Stands for Community Decimal Intensity and is the result of assigning a single intensity to each community of people who reported an earthquake.</li>
+            <li>Mmi: It measures the damage level of the earthquake on the surface, and it’s a measure that goes from 0 to 12.</li>
+            <li>Alert: The alert level from the PAGER earthquake impact scale.</li>
+            <li>Status: Indicates whether the event has been reviewed by a human.</li>
+            <li>Tsunami: If the flag value is "1", the event will include a link to the NOAA Tsunami website for tsunami information.</li>
+            <li>Sig: A number describing how significant the event is. Determined on a number of factors, including: magnitude, maximum MMI, felt reports, and estimated impact.</li>
+            <li>Net: The ID of a data contributor. Identifies the network considered to be the preferred source of information for this event.</li>
+            <li>Code: An identifying code assigned by - and unique from - the corresponding source for the event.</li>
+            <li>Ids: A comma-separated list of event ids that are associated to an event.</li>
+            <li>Sources: Could be the website that provided the data.</li>
+            <li>Types: Type of seismic event.</li>
+            <li>Nst: Total number of seismic stations used to determine earthquake location.</li>
+            <li>Dmin: Horizontal distance from the epicenter to the nearest station (in degrees).</li>
+            <li>Rms: Root-mean-square (RMS) travel time residual, in sec, using all weights.</li>
+            <li>Gap: Largest azimuthal gap between azimuthally adjacent stations (in degrees).</li>
+            <li>Magtype: Method or algorithm used to calculate the preferred magnitude for the event.</li>
+            <li>Geometrytype: Geometry type of the distribution of the earthquake.</li>
+            <li>Depth: Depth of the event in kilometers, Hypocentral depth.</li>
+            <li>Latitude: Decimal degrees latitude. Negative values for southern latitudes. Range is [-90.0,90.0].</li>
+            <li>Longitude: Decimal degrees longitude. Negative values for western longitudes. [-180.0,180.0].</li>
+            <li>Place — textual description of named geographic region near to the event. This may be a city name, with additional distance measured in km.</li>
+            <li>distanceKM — distance measured in km of the earthquake.</li>
+            <li>placeOnly — Textual description of named geographic region near to the event. This may be a city name.</li>
+            <li>Location — network that originally authored the reported location of this event.</li>
+            <li>Continent — Continent where the event occurred.</li>
+            <li>Country — country where the event occurred (i.e. USA).</li>
+            <li>Subnational — Subnation where the event occurred (i.e. Alaska, Oregon…)</li>
+            <li>City — City where the event occurred.</li>
+            <li>Locality — Area or district where the event occurred.</li>
+            <li>Postcode — Postcode of the area affected by the earthquake.</li>
+            <li>What3words — Random 3 words associated with each event.</li>
+            <li>Timezone — Timezone of the area subject of the event.</li>
+            <li>locationDetails — further information on the earthquake location.</li>
+          </ul>
+          
         </div>
       
-        <h4>Dataset</h4>
+        <h2>Task analysis</h2>
         <div style="text-align: center;">
           <p style="color: black;">
             We aimed to split the project into three primary tasks. Namely:
