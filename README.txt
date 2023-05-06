@@ -12,6 +12,8 @@ After collecting the dataset, some exploratory data analysis was applied to the 
 
 "Graphing.ipybn" contains all of the code that we used to generate the graphs of the project and can be run if the file "Earthquake_with_continents.csv" is found in the same repository. "app_bar.py" and "app_map.py" contain the code necessary to generate the interactive maps, this code is encompassed in the "Graphing.ipybn", but we needed a .py function in order to host the apps online in order to create an iframe to show our apps on our final webpage. 
 
+We used the platform Render to host our Dash apps. The first Dash app (https://earthquake-dataviz.onrender.com) uses the main branch to run the code "app_bar.py". The second Dash app (https://earthquake-dataviz-map.onrender.com) uses the app2 branch to run the code "app_map.py".
+
 index.html contains the html and css code we used to host our webpage on github pages. In order to see the webpage for this report please wither scroll down on the github page and click the "github-pages" button, following this on the page you are taken to click on the "View deployment" button. This will take you to our webpage containing all of our static and interactive graphs for the project. Or simply following the link: https://jane-hernandez.github.io/earthquake_dataviz/
 
 Please note that due to the size of the data and the fact that we used a free hosting service for our Dash apps, there may be some delay in some of the interactivity of the data.
